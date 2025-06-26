@@ -1,0 +1,73 @@
+"""
+Main signup process coordinator and demo script.
+"""
+from .username_validation import validate_username_length, validate_username_characters, check_username_exists
+from .password_generation import generate_secure_password
+from .user_interface import get_username_input, display_signup_result
+from .database import load_existing_users, add_user_to_database
+
+
+def run_signup_process(database):
+    max_attempts = 3
+    attempt = 0
+
+    while attempt < max_attempts:
+        print(f"\nAttempt {attempt + 1} of {max_attempts}")
+        username = get_username_input()
+
+        if not validate_username_length(username):
+            print("❌ Username must be between 3-20 characters.")
+            attempt += 1
+            continue
+
+        if not validate_username_characters(username):
+            print("❌ Username can only contain letters and numbers.")
+            attempt += 1
+            continue
+
+        if check_username_exists(username, database):
+            print("❌ Username already taken.")
+            attempt += 1
+            continue
+
+        print("✅ Username is valid! Generating secure password...")
+        password = generate_secure_password(12)
+        updated_database = add_user_to_database(username, password, database)
+        display_signup_result(username, password, True)
+
+        return {
+            "success": True,
+            "username": username,
+            "password": password,
+            "database": updated_database
+        }
+
+    print("\n❌ Maximum attempts reached. Signup failed.")
+    display_signup_result("", "", False)
+
+    return {
+        "success": False,
+        "username": "",
+        "password": "",
+        "database": database
+    }
+
+
+def main():
+    print("🔐 Welcome to the Secure Signup System!")
+    print("This system will create a username and generate a secure password for you.")
+    print("Passwords automatically include uppercase, lowercase, numbers, and special characters.")
+
+    user_database = load_existing_users()
+    print(f"\nNote: {len(user_database)} usernames are already taken.")
+
+    result = run_signup_process(user_database)
+
+    if result["success"]:
+        print("Thank you for signing up!")
+    else:
+        print("Please try again later.")
+
+
+if __name__ == "__main__":
+    main()
