@@ -7,7 +7,7 @@ and includes functionality for validating usernames and managing user sign-ups.
 # Password generation
 from .password_generator import generate_password
 
-# Username validation
+# Username validation  
 from .signup import (
     validate_username_length,
     validate_username_characters,
