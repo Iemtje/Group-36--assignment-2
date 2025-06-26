@@ -1,6 +1,6 @@
 name: Run Tests
 
-on: [push, pull_request]  # Run tests when you push or open a PR
+on: [push, pull_request]
 
 jobs:
   test:
@@ -21,6 +21,9 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run pytest
+      run: |
+        PYTHONPATH=src pytest tests/
+
       env:
         PYTHONPATH: ./src
       run: |
