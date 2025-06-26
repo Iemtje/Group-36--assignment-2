@@ -20,7 +20,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
 
-    - name: Run tests
-      run: PYTHONPATH=src pytest tests/test_password_generator.py
+    - name: Run tests with verbose output
+      run: PYTHONPATH=src pytest tests/test_password_generator.py -v
 
 
