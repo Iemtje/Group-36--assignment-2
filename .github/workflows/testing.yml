@@ -24,6 +24,4 @@ jobs:
       run: PYTHONPATH=src pytest tests/
 
 
-git add .github/workflows/testing.yml
-git commit -m "fix: correct workflow syntax and PYTHONPATH"
-git push
+
