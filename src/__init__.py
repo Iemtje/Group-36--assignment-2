@@ -7,25 +7,16 @@ and includes functionality for validating usernames and managing user sign-ups.
 # Password generation
 from .password_generator import generate_password
 
-# Signup and user management utilities
+# Username validation
 from .signup import (
-    is_valid_username,
-    contains_forbidden_words,
-    is_duplicate_username,
+    validate_username_length,
+    validate_username_characters,
+    check_username_exists,
 )
 
-# Password strength assessment
-from .Strength_checker import assess_password_strength
-
 __all__ = [
-    # Password generation
     "generate_password",
-
-    # Username validation
-    "is_valid_username",
-    "contains_forbidden_words",
-    "is_duplicate_username",
-
-    # Password strength
-    "assess_password_strength",
+    "validate_username_length",
+    "validate_username_characters", 
+    "check_username_exists",
 ]
