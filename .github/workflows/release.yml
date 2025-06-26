@@ -14,15 +14,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Zip source code
-      run: zip -r password-generator.zip src/ tests/
+    - name: Create source archive
+      run: zip -r password-generator-v${{ github.run_number }}.zip src/ tests/ requirements.txt
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       with:
         tag_name: v1.0.${{ github.run_number }}
         name: Release v1.0.${{ github.run_number }}
-        files: password-generator.zip
+        files: password-generator-v${{ github.run_number }}.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
