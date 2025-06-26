@@ -1,6 +1,9 @@
 import string
 import pytest
-from src.password_generator import generate_password 
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+from password_generator import generate_password 
 
 
 def test_default_length():
