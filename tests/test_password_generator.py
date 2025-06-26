@@ -1,6 +1,7 @@
 import string
 import pytest
-from src import generate_password
+from src.password_generator import generate_password 
+
 
 def test_default_length():
     """Test that default password length is 13."""
