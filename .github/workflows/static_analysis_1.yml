@@ -18,6 +18,6 @@ jobs:
     - name: Install flake8
       run: pip install flake8
 
-    - name: Run flake8 analysis
-      run: flake8 src/ --max-line-length=88
+    - name: Run flake8 code quality check
+      run: flake8 src/ --max-line-length=88 --ignore=E203
 
